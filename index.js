@@ -6,12 +6,12 @@ const openAiApiKey = "sk-proj-xgONG4QM-gLIdWArGwG0MTRPFfIcBreZmrdVURvyc1H3hBTTCZ
 
 async function getWeather(city) {
     try {
-        let weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherApiKey + "&units=metric";
-        let response = await fetch(weatherUrl);
-        let data = await response.json();
-        if (response.ok) {
-            console.log("It is " + data.main.temp + "°C in " + city);
-        } else {
+    let weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherApiKey + "&units=metric";
+    let response = await fetch(weatherUrl);
+    let data = await response.json();
+    if (response.ok) {
+        console.log("It is " + data.main.temp + "°C in " + city);
+    } else {
             console.log("Weather not found for " + city);
         }
     } catch (error) {
@@ -21,11 +21,11 @@ async function getWeather(city) {
 
 async function getFunFact(topic) {
     try {
-        let url = "https://api.openai.com/v1/completions";
-        let requestBody = {
-            model: "text-davinci-003",
-            prompt: "Tell me a fun fact about " + topic,
-            max_tokens: 50
+    let url = "https://api.openai.com/v1/completions";
+    let requestBody = {
+        model: "text-davinci-003",
+        prompt: "Tell me a fun fact about " + topic,
+        max_tokens: 50
         };
 
  let options = {
@@ -34,7 +34,7 @@ async function getFunFact(topic) {
       "Content-Type": "application/json",
       "Authorization": "Bearer " + openAiApiKey
              },
-        body: JSON.stringify(requestBody)
+    body: JSON.stringify(requestBody)
             };
 
  let response = await fetch(url, options);
@@ -53,15 +53,18 @@ async function getFunFact(topic) {
 async function chatbot() {
     let keepGoing = true;
     while (keepGoing) {
-      let input = prompt('Would you like the "weather" or a "fun fact"? Type "exit" to stop: ').toLowerCase();
-        if (input === "weather") {
-      let city = prompt("Enter a city: ");
+    let input = prompt('Would you like the "weather" or a "fun fact"? Type "exit" to stop: ').toLowerCase();
+if (input === "weather") {
+let city = prompt("Enter a city: ");
     await getWeather(city);
-        } else if (input === "fun fact") {
-            let topic = prompt("Enter a topic: ");
-            await getFunFact(topic);
+    } else if (input === "fun fact") {
+
+      let topic = prompt("Enter a topic: ");
+
+    await getFunFact(topic);
         } else if (input === "exit") {
-            keepGoing = false;
+
+keepGoing = false;
         } else {
             console.log("Please enter a valid option.");
         }
